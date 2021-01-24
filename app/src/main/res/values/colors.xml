@@ -10,5 +10,7 @@
     <color name="azul_claro">#00A6FF</color>
     <color name="verde_lodo">#009688</color>
     <color name="vermelho">#FF5252</color>
+    <color name="background_home">#DDDDDD</color>
+
 
 </resources>

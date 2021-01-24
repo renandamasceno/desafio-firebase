@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import com.renan.desafiofirebase.R
 import com.renan.desafiofirebase.auth.viewmodel.AuthenticatorViewModel
+import com.renan.desafiofirebase.utils.AuthUtil
 import com.renan.desafiofirebase.utils.AuthUtil.hideKeyboard
 
 
@@ -34,17 +36,23 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _view = view
-
+        checkUserId()
         login()
         createAccount()
     }
 
+    private fun checkUserId() {
+        if (!AuthUtil.getUserId(requireActivity()).isNullOrEmpty()) {
+            val navController = findNavController()
+            navController.navigate(R.id.action_loginFragment_to_homeFragment)
+        }
+    }
+
     private fun login() {
         val loginBtn = _view.findViewById<MaterialButton>(R.id.btnLogin)
-        val navControler = findNavController()
         loginBtn.setOnClickListener {
             hideKeyboard(_view)
-
+            navigateLogin()
         }
         initViewModel()
     }
@@ -62,11 +70,28 @@ class LoginFragment : Fragment() {
         })
     }
 
+    private fun navigateLogin() {
+        val email = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin).text.toString()
+        val password = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin).text.toString()
+        when {
+            AuthUtil.validateEmailPassword(email, password) -> {
+                authenticatorViewModel.loginEmailPassword(requireActivity(), email, password)
+            }
+            else -> {
+                Snackbar.make(
+                    _view,
+                    "Campos inválidos",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
     private fun navigateToHomeEmail(status: Boolean) {
         val navController = findNavController()
         if (status) {
             authenticatorViewModel.signInProvider()
-            //navController.navigate(R.id.action_loginFragment_to_explorationFragment)
+            navController.navigate(R.id.action_loginFragment_to_homeFragment)
         }
     }
 
