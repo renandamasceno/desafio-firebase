@@ -49,4 +49,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation platform('com.google.firebase:firebase-bom:26.3.0')
     implementation 'com.lapism:search:2.4.1@aar'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
