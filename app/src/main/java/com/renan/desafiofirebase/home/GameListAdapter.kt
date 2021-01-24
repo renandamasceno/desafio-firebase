@@ -23,6 +23,7 @@ class GameListAdapter(
         val gameDate = itemView.findViewById<TextView>(R.id.txtDateItemList)
 
         fun bind(GameModel: Games) {
+
             Picasso.get()
                 .load(R.drawable.splash)
                 .into(gameImage)

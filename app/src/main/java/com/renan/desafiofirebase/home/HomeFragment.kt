@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.renan.desafiofirebase.R
 
 
@@ -31,8 +33,17 @@ class HomeFragment : Fragment() {
         val recyclerViewGames = _view.findViewById<RecyclerView>(R.id.recyclerListGames)
         recyclerViewGames.apply {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(context,2)
-            adapter = GameListAdapter(listGames(),context)
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = GameListAdapter(listGames(), context)
+        }
+        addNewGame()
+    }
+
+    private fun addNewGame() {
+        val btnAddGame = _view.findViewById<FloatingActionButton>(R.id.floating_action_button)
+        val navControler = findNavController()
+        btnAddGame.setOnClickListener {
+            navControler.navigate(R.id.action_homeFragment_to_newGameFragment)
         }
     }
 
@@ -45,13 +56,13 @@ class HomeFragment : Fragment() {
                 "Jogo louco"
 
             ),
-                    Games(
-                    R.drawable.ic_launcher_background,
-            "Zelda 2",
-            "2025",
-            "Jogo louco em 2025"
+            Games(
+                R.drawable.splash,
+                "Zelda 2",
+                "2025",
+                "Jogo louco em 2025"
 
-        )
+            )
         )
     }
 }
