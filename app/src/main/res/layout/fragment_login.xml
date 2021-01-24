@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/splash"
     android:orientation="horizontal"
-    tools:context=".auth.LoginFragment">
+    tools:context=".auth.view.LoginFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -68,6 +68,7 @@
                 android:textColor="@color/azul_claro"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
