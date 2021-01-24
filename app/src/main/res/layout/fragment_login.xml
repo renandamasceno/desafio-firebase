@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="2dp"
+        android:layout_margin="5dp"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="20dp">
 
@@ -75,6 +75,7 @@
                 android:text="@string/log_in" />
 
             <Button
+                android:id="@+id/btnSignup"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
