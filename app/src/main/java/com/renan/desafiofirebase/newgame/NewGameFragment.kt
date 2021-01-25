@@ -34,9 +34,13 @@ class NewGameFragment : Fragment() {
         val navControler = findNavController()
 
         btnSaveGame.setOnClickListener {
-            navControler.navigate(R.id.action_newGameFragment_to_homeFragment, bundleOf(
-
-            ))
+            navControler.navigate(
+                R.id.action_newGameFragment_to_homeFragment, bundleOf(
+                    "nameGame" to nameGame.text.toString(),
+                    "dateGame" to dateGame.text.toString(),
+                    "description" to description.text.toString()
+                )
+            )
         }
 
     }

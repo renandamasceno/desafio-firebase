@@ -12,7 +12,7 @@ import com.renan.desafiofirebase.R
 import com.squareup.picasso.Picasso
 
 class GameListAdapter(
-    private var dataSet: List<Games>,
+    private var dataSet: MutableList<Games>,
     private var context: Context
 ) : RecyclerView.Adapter<GameListAdapter.GameListViewHolder>() {
     lateinit var view: View
