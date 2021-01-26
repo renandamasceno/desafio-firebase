@@ -1,26 +1,30 @@
 package com.renan.desafiofirebase.home
 
-import android.content.ClipDescription
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.beust.klaxon.Klaxon
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.renan.desafiofirebase.R
-import kotlin.math.log
+import org.json.JSONObject
 
 
 class HomeFragment : Fragment() {
 
     private lateinit var _view: View
+
+    var listGames: ArrayList<GamesModel> = ArrayList()
+    val database = FirebaseDatabase.getInstance()
+    val myRef = database.getReference("recyclerview")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,22 +38,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var listGames: MutableList<Games> = mutableListOf(
-            Games(
-                R.drawable.splash,
-                "Zelda novo",
-                "2021",
-                "Jogo louco"
 
-            ),
-            Games(
-                R.drawable.splash,
-                "Zelda 2",
-                "2025",
-                "Jogo louco em 2025"
-
-            )
-        )
 
         _view = view
 
@@ -57,36 +46,52 @@ class HomeFragment : Fragment() {
         recyclerViewGames.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(view.context, 2)
-            adapter = GameListAdapter(listGames, view.context)
+            adapter = GameListAdapter(listGames, view.context, myRef)
         }
-        addNewGame()
+        btnAddNewGame()
+
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    val gamesHash = snapshot.value as HashMap<*,*>
+
+                    for ((k,v) in gamesHash){
+                        val json = JSONObject(v.toString())
+                        val result = Klaxon()
+                            .parse<GamesModel>(json.toString())
+                        listGames.add(result!!)
+                    }
+                    recyclerViewGames.adapter?.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
         val nameGame = arguments?.getString("nameGame")
         val dateGame = arguments?.getString("dateGame")
         val description = arguments?.getString("description")
 
-        if (nameGame != null) {
-
-            listGames.add(
-                Games(
-                    R.drawable.splash,
-                    "$nameGame",
-                    "$dateGame",
-                    "$description"
-                )
+        if(nameGame != null){
+            val id: String = myRef.push().key.toString()
+            val gameItem = GamesModel(
+//                R.drawable.splash,
+                nameGame.toString(),
+                dateGame.toString(),
+                description.toString()
             )
-            recyclerViewGames.adapter?.run {
-                notifyDataSetChanged()
-
-            }
-
+            val a = myRef.child(id).setValue(gameItem)
+            listGames.add(gameItem)
+            recyclerViewGames.adapter?.notifyDataSetChanged()
         }
-        Log.d("RENANVALOR", "TESTE = $listGames")
 
 
     }
 
-    private fun addNewGame() {
+    private fun btnAddNewGame() {
         val btnAddGame = _view.findViewById<FloatingActionButton>(R.id.floating_action_button)
         val navControler = findNavController()
         btnAddGame.setOnClickListener {
@@ -95,14 +100,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun listGameAdd(
-        listGames: MutableList<Games>,
+        listGames: MutableList<GamesModel>,
         nameGame: String,
         dateGame: String,
         description: String,
     ) {
         listGames.add(
-            Games(
-                R.drawable.splash,
+            GamesModel(
+//                R.drawable.splash,
                 nameGame,
                 dateGame,
                 description
