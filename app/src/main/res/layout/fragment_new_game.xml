@@ -7,99 +7,118 @@
     android:background="@drawable/splash"
     tools:context=".newgame.NewGameFragment">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/addImgGame"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="155dp"
-        android:layout_marginEnd="156dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/materialCardView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:src="@drawable/splash" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView2"
-        android:layout_width="match_parent"
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:backgroundTint="@color/white"
-        app:cardCornerRadius="20dp"
+        android:layout_centerInParent="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:foregroundGravity="center"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilNameGame"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:hint="@string/name"
-                android:textColorHint="@color/azul_claro"
-                app:boxBackgroundColor="@color/white"
-                app:boxStrokeColor="@color/azul_claro">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tietNameGame"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilGameCreateName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/verde_lodo" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:backgroundTint="@color/white">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilCreatedAt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:hint="@string/created_at"
-                android:textColorHint="@color/azul_claro"
-                app:boxBackgroundColor="@color/white"
-                app:boxStrokeColor="@color/azul_claro">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietNameGame"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:hint="@string/name"
+                        android:inputType="text"
+                        android:textColor="@color/verde_lodo" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tietCreatedAt"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilGameCreateDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/verde_lodo" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:backgroundTint="@color/white">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:hint="@string/description"
-                android:textColorHint="@color/azul_claro"
-                app:boxBackgroundColor="@color/white"
-                app:boxStrokeColor="@color/azul_claro">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietCreatedAt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:hint="@string/created_at"
+                        android:inputType="date"
+                        android:textColor="@color/verde_lodo" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tietDescription"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilGameCreateDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/verde_lodo" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:background="@color/white">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSaveGame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:backgroundTint="@color/vermelho"
-                android:text="@string/save_game" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tietDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:ellipsize="end"
+                        android:hint="@string/description"
+                        android:inputType="text"
+                        android:lineSpacingMultiplier="1.5"
+                        android:lines="3"
+                        android:textColor="@color/verde_lodo" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSaveGame"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/vermelho"
+                    android:text="@string/save_game"
+                    app:cornerRadius="3dp" />
 
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgCreateGameBtn"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="1dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_photo_camera_24"
+
+            app:civ_circle_background_color="@color/vermelho" />
+
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

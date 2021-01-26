@@ -1,20 +1,16 @@
 package com.renan.desafiofirebase.home
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DatabaseReference
 import com.renan.desafiofirebase.R
-import com.squareup.picasso.Picasso
 
 class GameListAdapter(
     private var dataSet: MutableList<GamesModel>,
-    private var context: Context,
-    private var ref: DatabaseReference
+    private val listener: (GamesModel) -> Unit
 ) : RecyclerView.Adapter<GameListAdapter.GameListViewHolder>() {
     lateinit var view: View
 
