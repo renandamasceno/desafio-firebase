@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_homeFragment_to_newGameFragment"
             app:destination="@id/newGameFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailsGameFragment"
+            app:destination="@id/detailsGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/newGameFragment"
@@ -40,4 +43,9 @@
             android:id="@+id/action_newGameFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/detailsGameFragment"
+        android:name="com.renan.desafiofirebase.gamedetails.DetailsGameFragment"
+        android:label="fragment_details_game"
+        tools:layout="@layout/fragment_details_game" />
 </navigation>

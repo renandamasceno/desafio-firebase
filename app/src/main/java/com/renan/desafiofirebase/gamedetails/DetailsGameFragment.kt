@@ -30,9 +30,9 @@ class DetailsGameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _view = view
         val gameId = arguments?.getString(GAME_ID)
-        val image= arguments?.getString(GAME_IMAGE_URL)
-        val name = arguments?.getString(GAME_TITLE)
-        val dateLaunch = arguments?.getInt(GAME_CREATED_AT)
+        val image= arguments?.getString(GAME_IMAGE)
+        val name = arguments?.getString(GAME_NAME)
+        val dateLaunch = arguments?.getInt(GAME_DATE)
         val description = arguments?.getString(GAME_DESCRIPTION)
 
         val imageCoverView = _view.findViewById<ImageView>(R.id.imageGame)
@@ -40,6 +40,14 @@ class DetailsGameFragment : Fragment() {
         val title2View = _view.findViewById<TextView>(R.id.name2game)
         val createdAtView = _view.findViewById<TextView>(R.id.dateGame)
         val descriptionView = _view.findViewById<TextView>(R.id.DescriptionGame)
+    }
+
+    companion object{
+        const val GAME_ID: String = "id"
+        const val GAME_NAME: String = "title"
+        const val GAME_DESCRIPTION: String = "description"
+        const val GAME_DATE: String = "createdat"
+        const val GAME_IMAGE: String = "IMAGEURL"
     }
 
 
