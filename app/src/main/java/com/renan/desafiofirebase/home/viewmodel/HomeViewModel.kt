@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.*
 import com.renan.desafiofirebase.home.model.GamesModel
-import com.renan.desafiofirebase.utils.AuthUtil.getUserId
+import com.renan.desafiofirebase.utils.ProjectUtils.getUserId
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 

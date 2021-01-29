@@ -14,8 +14,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.renan.desafiofirebase.R
 import com.renan.desafiofirebase.auth.viewmodel.AuthenticatorViewModel
-import com.renan.desafiofirebase.utils.AuthUtil.hideKeyboard
-import com.renan.desafiofirebase.utils.AuthUtil.validateNameEmailPassword
+import com.renan.desafiofirebase.utils.ProjectUtils.hideKeyboard
+import com.renan.desafiofirebase.utils.ProjectUtils.validateNameEmailPassword
 
 class RegisterFragment : Fragment() {
 

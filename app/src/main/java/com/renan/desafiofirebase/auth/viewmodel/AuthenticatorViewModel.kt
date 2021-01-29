@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.renan.desafiofirebase.utils.AuthUtil
+import com.renan.desafiofirebase.utils.ProjectUtils
 
 class AuthenticatorViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -27,7 +27,7 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
                 when {
                     task.isSuccessful -> {
                         val user = FirebaseAuth.getInstance().currentUser
-                        AuthUtil.saveUserId(
+                        ProjectUtils.saveUserId(
                             getApplication(),
                             FirebaseAuth.getInstance().currentUser?.uid
                         )
@@ -56,22 +56,22 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
                             val currentUser = FirebaseAuth.getInstance().currentUser
                             val provider = signInProvider()
 
-                            AuthUtil.saveUserId(
+                            ProjectUtils.saveUserId(
                                 getApplication(),
                                 currentUser?.uid
                             )
 
-                            AuthUtil.saveUserName(
+                            ProjectUtils.saveUserName(
                                 getApplication(),
                                 currentUser?.displayName
                             )
 
-                            AuthUtil.saveUserEmail(
+                            ProjectUtils.saveUserEmail(
                                 getApplication(),
                                 currentUser?.email
                             )
 
-                            AuthUtil.saveUserImage(
+                            ProjectUtils.saveUserImage(
                                 getApplication(),
                                 currentUser?.photoUrl.toString()
                             )
@@ -96,7 +96,7 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
         val currentUser = FirebaseAuth.getInstance().currentUser
         val provider = currentUser?.getIdToken(false)?.result?.signInProvider
         Log.d("authenticator", provider.toString())
-        AuthUtil.saveSignInMethod(
+        ProjectUtils.saveSignInMethod(
             getApplication(),
             provider
         )

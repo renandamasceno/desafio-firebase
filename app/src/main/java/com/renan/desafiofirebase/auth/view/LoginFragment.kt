@@ -13,8 +13,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.renan.desafiofirebase.R
 import com.renan.desafiofirebase.auth.viewmodel.AuthenticatorViewModel
-import com.renan.desafiofirebase.utils.AuthUtil
-import com.renan.desafiofirebase.utils.AuthUtil.hideKeyboard
+import com.renan.desafiofirebase.utils.ProjectUtils
+import com.renan.desafiofirebase.utils.ProjectUtils.hideKeyboard
 
 
 class LoginFragment : Fragment() {
@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun checkUserId() {
-        if (!AuthUtil.getUserId(requireActivity()).isNullOrEmpty()) {
+        if (!ProjectUtils.getUserId(requireActivity()).isNullOrEmpty()) {
             val navController = findNavController()
             navController.navigate(R.id.action_loginFragment_to_homeFragment)
         }
@@ -74,7 +74,7 @@ class LoginFragment : Fragment() {
         val email = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin).text.toString()
         val password = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin).text.toString()
         when {
-            AuthUtil.validateEmailPassword(email, password) -> {
+            ProjectUtils.validateEmailPassword(email, password) -> {
                 authenticatorViewModel.loginEmailPassword(requireActivity(), email, password)
             }
             else -> {

@@ -3,9 +3,11 @@ package com.renan.desafiofirebase.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.Uri
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.webkit.MimeTypeMap
 import com.renan.desafiofirebase.utils.Constants.APP_KEY
 import com.renan.desafiofirebase.utils.Constants.EMPTY_STRING
 import com.renan.desafiofirebase.utils.Constants.PASSWORD
@@ -15,7 +17,7 @@ import com.renan.desafiofirebase.utils.Constants.USER_NAME
 import com.renan.desafiofirebase.utils.Constants.USER_PHOTO_URL
 import com.renan.desafiofirebase.utils.Constants.USER_SIGN_IN_METHOD
 
-object AuthUtil {
+object ProjectUtils {
 
     fun saveUserId(context: Context, uiid: String?) {
         val preferences: SharedPreferences =
@@ -143,5 +145,20 @@ object AuthUtil {
         val imm: InputMethodManager =
             view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    fun getFileExtension(view: View, uri: Uri?): String? {
+        return MimeTypeMap
+            .getSingleton()
+            .getExtensionFromMimeType(view.context.contentResolver.getType(uri!!))
+    }
+
+    fun validateText(title: String?, date: String?, description: String?): Boolean {
+        return when {
+            title.isNullOrEmpty() || date.isNullOrEmpty() || description.isNullOrEmpty() -> {
+                false
+            }
+            else -> true
+        }
     }
 }
