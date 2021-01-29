@@ -1,7 +1,6 @@
 package com.renan.desafiofirebase.newgame.view
 
 import android.Manifest
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,26 +10,18 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.MimeTypeMap
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.renan.desafiofirebase.R
 import com.renan.desafiofirebase.home.model.GamesModel
 import com.renan.desafiofirebase.newgame.viewmodel.AddGameViewModel
@@ -39,7 +30,6 @@ import com.renan.desafiofirebase.utils.Constants.READ_STORAGE_PERMISSION_CODE
 import com.renan.desafiofirebase.utils.ProjectUtils.hideKeyboard
 import com.renan.desafiofirebase.utils.ProjectUtils.validateText
 import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
 class NewGameFragment : Fragment() {
@@ -199,7 +189,7 @@ class NewGameFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE_REQUEST_CODE && data!!.data != null) {
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE_REQUEST_CODE && data!!.data != null) {
             selectedImageUri = data.data
 
             val profileImageView = _view.findViewById<ImageView>(R.id.imgCreateGameBtn)

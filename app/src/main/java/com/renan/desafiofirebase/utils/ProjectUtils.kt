@@ -16,6 +16,7 @@ import com.renan.desafiofirebase.utils.Constants.USER_EMAIL
 import com.renan.desafiofirebase.utils.Constants.USER_NAME
 import com.renan.desafiofirebase.utils.Constants.USER_PHOTO_URL
 import com.renan.desafiofirebase.utils.Constants.USER_SIGN_IN_METHOD
+import java.util.*
 
 object ProjectUtils {
 
@@ -30,7 +31,7 @@ object ProjectUtils {
             context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
 
         if (!name.isNullOrEmpty()) {
-            val newString = name.split(" ").joinToString(" ") { it.capitalize() }
+            val newString = name.split(" ").joinToString(" ") { it.capitalize(Locale.ROOT) }
             preferences.edit().putString(USER_NAME, newString).apply()
         } else {
             preferences.edit().putString(USER_NAME, name).apply()
@@ -74,7 +75,7 @@ object ProjectUtils {
         return preferences.getString(USER_EMAIL, EMPTY_STRING)
     }
 
-    fun getUserProvider(context: Context): String? {
+    private fun getUserProvider(context: Context): String? {
         val preferences: SharedPreferences =
             context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         return preferences.getString(USER_SIGN_IN_METHOD, EMPTY_STRING)

@@ -37,15 +37,15 @@ class GameListAdapter(
     override fun getItemCount() = dataSet.size
 
     class GameListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val gameImage = itemView.findViewById<ImageView>(R.id.imgItemList)
-        val gameName = itemView.findViewById<TextView>(R.id.txtNameItemList)
-        val gameDate = itemView.findViewById<TextView>(R.id.txtDateItemList)
+        private val gameImage = itemView.findViewById<ImageView>(R.id.imgItemList)
+        private val gameName = itemView.findViewById<TextView>(R.id.txtNameItemList)
+        private val gameDate = itemView.findViewById<TextView>(R.id.txtDateItemList)
 
         fun bind(image: String, name: String, dateLaunch: String) {
 
 
             gameName.text = name.capitalize(Locale.ROOT)
-            gameDate.text = dateLaunch.toString()
+            gameDate.text = dateLaunch
             if (image.isNotEmpty()) {
                 Picasso.get().load(image).into(gameImage)
             } else {
