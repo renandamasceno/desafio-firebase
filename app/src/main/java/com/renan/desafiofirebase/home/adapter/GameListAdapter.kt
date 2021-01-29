@@ -1,4 +1,4 @@
-package com.renan.desafiofirebase.home
+package com.renan.desafiofirebase.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.renan.desafiofirebase.R
+import com.renan.desafiofirebase.home.model.GamesModel
+import com.squareup.picasso.Picasso
+import java.util.*
 
 class GameListAdapter(
     private var dataSet: MutableList<GamesModel>,
@@ -22,7 +25,13 @@ class GameListAdapter(
 
     override fun onBindViewHolder(holder: GameListViewHolder, position: Int) {
         val item = dataSet[position]
-        holder.bind(item)
+
+        val image = item.image
+        val name = item.name
+        val dateLaunch = item.dateLaunch
+
+        holder.bind(image,name,dateLaunch)
+        holder.itemView.setOnClickListener { listener(item) }
     }
 
     override fun getItemCount() = dataSet.size
@@ -32,14 +41,16 @@ class GameListAdapter(
         val gameName = itemView.findViewById<TextView>(R.id.txtNameItemList)
         val gameDate = itemView.findViewById<TextView>(R.id.txtDateItemList)
 
-        fun bind(gameModel: GamesModel) {
-//
-//            Picasso.get()
-//                .load(R.drawable.splash)
-//                .into(gameImage)
+        fun bind(image: String, name: String, dateLaunch: String) {
 
-            gameName.text = gameModel.name
-            gameDate.text = gameModel.dateLaunch
+
+            gameName.text = name.capitalize(Locale.ROOT)
+            gameDate.text = dateLaunch.toString()
+            if (image.isNotEmpty()) {
+                Picasso.get().load(image).into(gameImage)
+            } else {
+                Picasso.get().load(R.drawable.placeholder).into(gameImage)
+            }
         }
 
     }

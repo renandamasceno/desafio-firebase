@@ -1,4 +1,4 @@
-package com.renan.desafiofirebase.home
+package com.renan.desafiofirebase.home.view
 
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +17,8 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.renan.desafiofirebase.R
+import com.renan.desafiofirebase.home.model.GamesModel
+import com.renan.desafiofirebase.home.adapter.GameListAdapter
 
 
 class HomeFragment : Fragment() {

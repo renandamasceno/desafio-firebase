@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.renan.desafiofirebase.home.HomeFragment"
+        android:name="com.renan.desafiofirebase.home.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/newGameFragment"
-        android:name="com.renan.desafiofirebase.newgame.NewGameFragment"
+        android:name="com.renan.desafiofirebase.newgame.view.NewGameFragment"
         android:label="fragment_new_game"
         tools:layout="@layout/fragment_new_game" >
         <action

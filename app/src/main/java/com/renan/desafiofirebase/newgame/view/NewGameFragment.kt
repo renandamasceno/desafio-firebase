@@ -1,4 +1,4 @@
-package com.renan.desafiofirebase.newgame
+package com.renan.desafiofirebase.newgame.view
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -9,21 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.MimeTypeMap
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.renan.desafiofirebase.R
-import com.renan.desafiofirebase.home.GamesModel
+import com.renan.desafiofirebase.home.model.GamesModel
 import de.hdodenhof.circleimageview.CircleImageView
 
 class NewGameFragment : Fragment() {
@@ -126,8 +122,8 @@ class NewGameFragment : Fragment() {
         description: String,
         imageRef: String
     ) {
-        val newGame = GamesModel(name, date, description, imageRef)
-        databaseRef.child(user!!.uid).child(name).setValue(newGame)
+        //val newGame = GamesModel(name, date, description, imageRef)
+       // databaseRef.child(user!!.uid).child(name).setValue(newGame)
 
     }
 
