@@ -11,7 +11,7 @@
         android:id="@+id/imageGame"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:scaleType="center"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -79,7 +79,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/lan_amento"
-        android:textColor="@color/background_home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name2game" />
 
@@ -87,7 +86,6 @@
         android:id="@+id/dateGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/background_home"
         android:layout_marginStart="5dp"
         app:layout_constraintStart_toEndOf="@+id/tvLancamentoGame"
         app:layout_constraintTop_toBottomOf="@+id/name2game"
@@ -108,7 +106,6 @@
             android:id="@+id/DescriptionGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/background_home"
             android:textSize="16sp"
             tools:text="@tools:sample/lorem[200]" />
     </ScrollView>
