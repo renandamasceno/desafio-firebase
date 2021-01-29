@@ -11,6 +11,7 @@
     <color name="verde_lodo">#009688</color>
     <color name="vermelho">#FF5252</color>
     <color name="background_home">#DDDDDD</color>
+    <color name="transparent">#00000000</color>
 
 
 </resources>

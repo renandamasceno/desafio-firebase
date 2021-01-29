@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,22 +21,21 @@ import com.google.firebase.storage.StorageReference
 import com.renan.desafiofirebase.R
 import com.renan.desafiofirebase.home.model.GamesModel
 import com.renan.desafiofirebase.home.adapter.GameListAdapter
+import com.renan.desafiofirebase.home.viewmodel.HomeViewModel
 
 
 class HomeFragment : Fragment() {
 
     private lateinit var _view: View
 
-    var listGames = mutableListOf<GamesModel>()
-    private lateinit var auth: FirebaseAuth
-    private lateinit var user: FirebaseUser
-    private lateinit var storage: FirebaseStorage
-    private lateinit var database: FirebaseDatabase
-    private lateinit var storageRef: StorageReference
-    private lateinit var databaseRef: DatabaseReference
-    private lateinit var userDatabaseRef: DatabaseReference
-    private lateinit var userStorageRef: StorageReference
+    private var listGames = mutableListOf<GamesModel>()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var gameListAdapter: GameListAdapter
+    private lateinit var navController: NavController
 
+    private val _homeViewModel: HomeViewModel by lazy {
+        ViewModelProvider(this).get(HomeViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,87 +48,37 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
         _view = view
-        initSetup()
-        val recyclerViewGames = _view.findViewById<RecyclerView>(R.id.recyclerListGames)
-        recyclerViewGames.apply {
+        navController = findNavController()
+
+        recyclerView()
+
+    }
+
+    private fun recyclerView() {
+        recyclerView = _view.findViewById(R.id.recyclerListGames)
+        val manager = GridLayoutManager(_view.context, 2)
+
+        gameListAdapter = GameListAdapter(listGames) {
+            navigateToGameDetails(it)
+        }
+
+        recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = GridLayoutManager(view.context, 2)
-            adapter = GameListAdapter(listGames){
-                val bundle = bundleOf("GAME" to it)
-            }
-        }
-
-
-        val gameListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-              //  val games = snapshot.value as MutableList<*>
-
-                recyclerViewGames.adapter?.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.w("TAG", "loadPost:onCancelled", error.toException())
-            }
-        }
-        userDatabaseRef.addValueEventListener(gameListener)
-
-        val nameGame = arguments?.getString("nameGame")
-        val dateGame = arguments?.getString("dateGame")
-        val description = arguments?.getString("description")
-
-
-//        if(nameGame != null){
-//            val id: String = myRef.push().key.toString()
-//            val gameItem = GamesModel(
-////                R.drawable.splash,
-//                "teste",
-//                nameGame.toString(),
-//                dateGame.toString(),
-//                description.toString()
-//            )
-//            var a = myRef.child(id).setValue(gameItem)
-//            listGames.add(gameItem)
-//            recyclerViewGames.adapter?.notifyDataSetChanged()
-//        }
-        btnAddNewGame()
-    }
-
-    private fun initSetup() {
-        auth = FirebaseAuth.getInstance()
-        user = auth.currentUser!!
-        storage = FirebaseStorage.getInstance()
-        database = FirebaseDatabase.getInstance()
-        storageRef = storage.getReference("uploads")
-        databaseRef = database.getReference("users")
-        userDatabaseRef = databaseRef.child(user.uid)
-        userStorageRef = storageRef.child(user.uid)
-    }
-
-    private fun btnAddNewGame() {
-        val btnAddGame = _view.findViewById<FloatingActionButton>(R.id.floating_action_button)
-        val navControler = findNavController()
-        btnAddGame.setOnClickListener {
-            navControler.navigate(R.id.action_homeFragment_to_newGameFragment)
+            layoutManager = manager
+            adapter = gameListAdapter
         }
     }
 
-//    private fun listGameAdd(
-//        listGames: MutableList<GamesModel>,
-//        nameGame: String,
-//        dateGame: String,
-//        description: String,
-//    ) {
-//        listGames.add(
-//            GamesModel(
-//                R.drawable.splash,
-//                nameGame,
-//                dateGame,
-//                description
-//            )
-//        )
-//    }
+    private fun navigateToGame(gameModel: GamesModel) {
+        val bundle = bundleOf(
+            GAME_ID to gameModel.id,
+            GAME_IMAGE_URL to gameModel.imageUrl,
+            GAME_TITLE to gameModel.title,
+            GAME_CREATED_AT to gameModel.createdAt,
+            GAME_DESCRIPTION to gameModel.description
+        )
+        _navController.navigate(R.id.action_homeFragment_to_gameFragment, bundle)
+    }
+
 }
